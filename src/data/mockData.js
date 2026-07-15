@@ -74,15 +74,15 @@ export const mockAlertMessages = [
   {
     type: "sms",
     lang: "te",
-    text: "⚠️ హెచ్చరిక: రాబోయే 5 రోజుల్లో వర్షం లేదు. మీ పత్తి పంటకు నీరు అవసరం. దయచేసి రేపు నీటి పారుదల చేయండి.",
-    translation: "(⚠️ Alert: No rain in next 5 days. Your cotton crop needs water. Please irrigate tomorrow.)",
+    text: "⚠️ KisanAI WhatsApp Alert: రాబోయే 5 రోజుల్లో వర్షం లేదు. మీ పత్తి పంటకు నీరు అవసరం. దయచేసి రేపు నీటి పారుదల చేయండి.",
+    translation: "(⚠️ No rain in next 5 days. Your cotton crop needs water. Please irrigate tomorrow.)",
     time: "Today, 08:30 AM",
     tier: 0
   },
   {
-    type: "voice",
+    type: "ivr",
     lang: "en",
-    text: "Voice Call: 'Sentinel-1 satellite shows soil moisture dropping below 20%. Hold fertilizer application to prevent waste.'",
+    text: "📱 WhatsApp Message: 'Satellite scan shows soil moisture dropping to 19%. Hold fertilizer application to prevent runoff waste. Irrigate within 24 hours.'",
     translation: "",
     time: "Yesterday, 04:15 PM",
     tier: 0
@@ -90,9 +90,10 @@ export const mockAlertMessages = [
   {
     type: "sms",
     lang: "te",
-    text: "✅ సెన్సార్ అప్‌డేట్: మీ పొలంలో తేమ శాతం 45%. ఇప్పుడే యూరియా వేయడానికి అనువైన సమయం.",
-    translation: "(✅ Sensor Update: Soil moisture at 45%. Perfect time to apply Urea now.)",
+    text: "✅ KisanAI Update: మీ పొలంలో తేమ శాతం 45%. ఇప్పుడే యూరియా వేయడానికి అనువైన సమయం.",
+    translation: "(✅ Soil moisture at 45%. Perfect time to apply Urea now.)",
     time: "Today, 10:00 AM",
     tier: 1
   }
 ];
+

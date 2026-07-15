@@ -1,55 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sprout, Smartphone, Activity, CheckCircle2, XCircle, ArrowRight, Satellite, MessageSquare, Phone, ShieldCheck, HeartPulse, Globe } from 'lucide-react';
+import { Sprout, Smartphone, Activity, CheckCircle2, XCircle, ArrowRight, Satellite, MessageSquare, MessageCircle, ShieldCheck, HeartPulse, Globe } from 'lucide-react';
 import './LandingPage.css';
 
 const translations = {
   en: {
     logo: "KisanAI",
-    tag: "Made for Small & Marginal Farmers",
-    title1: "Protect Your Crops.",
-    title2: "No Internet Needed.",
-    subtitle: "KisanAI combines satellite radar, government soil records, and weather forecasts to send personalized farming advisories directly to basic keypad phones via automated voice calls and SMS.",
+    tag: "AI-Powered Farming Intelligence on WhatsApp",
+    title1: "Smarter Farming,",
+    title2: "Right on WhatsApp.",
+    subtitle: "KisanAI uses satellite imagery, real weather data, and soil health records to deliver personalized, real-time crop advisories — directly to farmers through WhatsApp on their smartphones.",
     demoBtn: "Try Interactive Demo",
     howBtn: "How it works",
-    stat1Val: "100%",
-    stat1Lbl: "Offline Accessible",
+    stat1Val: "WhatsApp",
+    stat1Lbl: "Delivery Channel",
     stat2Val: "6-Day",
     stat2Lbl: "Satellite Revisit",
     stat3Val: "Indic",
     stat3Lbl: "Local Languages",
     whatTag: "WHAT WE DO",
     whatTitle: "Farming Guided by Space Technology & Ground Intelligence",
-    whatDesc: "We monitor agricultural plots remotely using European Space Agency (ESA) satellites. By analyzing radar and optical waves, we calculate exact soil moisture and vegetation health without requiring expensive sensors on your farm.",
+    whatDesc: "We monitor agricultural plots remotely using European Space Agency (ESA) satellites. By analyzing radar and optical waves, we calculate exact soil moisture and vegetation health — then push those insights directly to the farmer's WhatsApp.",
     benefit1Title: "Prevent Crop Losses:",
-    benefit1Desc: " Get early warnings about upcoming dry spells.",
+    benefit1Desc: " Get early WhatsApp alerts about upcoming dry spells before crops are damaged.",
     benefit2Title: "Optimize Resources:",
-    benefit2Desc: " Know exactly when and how much fertilizer or water to apply.",
+    benefit2Desc: " Know exactly when and how much water or fertilizer to apply, based on satellite data.",
     benefit3Title: "Disease Prevention:",
-    benefit3Desc: " Spot early vegetation stress before it becomes visible to the eye.",
+    benefit3Desc: " Spot early vegetation stress via satellite, and diagnose via photo sent on WhatsApp.",
     engineTag: "THE 3 STAGES",
     engineTitle: "How the KisanAI Engine Works",
-    engineDesc: "Our platform provides step-by-step guidance from seed selection to harvest diagnostics.",
+    engineDesc: "Our platform guides farmers from seed selection to harvest — with real-time satellite intelligence delivered via WhatsApp.",
     stage1Num: "01",
     stage1Title: "1. Pre-Planting Advice",
-    stage1Desc: "We check your village's soil cards, groundwater depth, and seasonal rain forecast. We filter out crops that are likely to fail, recommending safe options and profit-optimized options.",
+    stage1Desc: "We check soil health cards, groundwater depth, and seasonal forecasts for your village. Safe and profit-optimized crop options are sent directly to your WhatsApp.",
     stage1Sources: ["Soil Card", "Groundwater", "Rain Forecast"],
     stage2Num: "02",
     stage2Title: "2. Growth Monitoring",
-    stage2Desc: "Once planted, satellites track your crop's water stress. If moisture drops below safety levels, you receive an automated alert to irrigate before damage occurs.",
+    stage2Desc: "Satellites track your crop's soil moisture and vegetation stress. If levels drop below safety thresholds, a real-time WhatsApp alert is sent with specific irrigation instructions.",
     stage2Sources: ["Radar Moisture", "Plant Stress", "Evaporation"],
     stage3Num: "03",
-    stage3Title: "3. Problem Diagnosis",
-    stage3Desc: "Spotted yellow leaves or pests? Send a photo or voice note. Our system analyzes it against satellite stress history, sends diagnostic advice, or connects you to experts.",
-    stage3Sources: ["AI Photo Scan", "Voice Notes", "Government Expert"],
-    phoneTag: "INCLUSIVE CHANNELS",
-    phoneTitle: "Built for Keypad Phones",
-    phoneDesc1: "Over 50% of small farmers in rural India do not use smartphones. Those who do often face slow, unreliable internet connections. Apps are not the solution.",
-    phoneDesc2: "KisanAI bypasses apps entirely. We convert complex satellite maps and agronomic algorithms into simple:",
-    ivrTitle: "Automated Voice Calls (IVR)",
-    ivrDesc: "In local Indic languages, detailing clear watering actions.",
-    smsTitle: "SMS Advisories",
-    smsDesc: "Concise text summaries sent directly to any basic phone.",
+    stage3Title: "3. Photo Diagnosis",
+    stage3Desc: "Spotted yellow leaves or unusual patches? Simply send a photo on WhatsApp. Our AI analyzes it against satellite stress maps and returns a diagnosis with treatment advice.",
+    stage3Sources: ["WhatsApp Photo", "AI Scan", "Expert Advisory"],
+    phoneTag: "HOW IT REACHES FARMERS",
+    phoneTitle: "Delivered via WhatsApp",
+    phoneDesc1: "Farmers in India already use WhatsApp daily. Rather than building a new app they need to download and learn, KisanAI meets them where they already are.",
+    phoneDesc2: "Our intelligence engine converts complex satellite maps and agronomic algorithms into simple, readable WhatsApp messages:",
+    ivrTitle: "WhatsApp Text Advisories",
+    ivrDesc: "Personalized crop and irrigation messages in local Indic languages, sent directly on WhatsApp.",
+    smsTitle: "WhatsApp Photo Diagnosis",
+    smsDesc: "Farmers send a crop photo → our AI replies with a disease diagnosis and treatment plan.",
     limitsTag: "LIMITATIONS",
     limitsTitle: "Honest System Limits",
     limitsDesc: "What our satellite models can and cannot do. We value absolute agronomic honesty.",
@@ -78,14 +78,14 @@ const translations = {
   },
   te: {
     logo: "కిసాన్AI",
-    tag: "చిన్న & సన్నకారు రైతుల కోసం రూపొందించబడింది",
-    title1: "మీ పంటలను రక్షించండి.",
-    title2: "ఇంటర్నెట్ అవసరం లేదు.",
-    subtitle: "కిసాన్ఐఐ శాటిలైట్ రాడార్, ప్రభుత్వ నేల రికార్డులు మరియు వాతావరణ సూచనలను అనుసంధానించి రైతులకు స్వయంచాలక వాయిస్ కాల్స్ మరియు SMS ద్వారా నేరుగా సాధారణ కీప్యాడ్ ఫోన్‌లకు వ్యక్తిగతీకరించిన సలహాలను పంపుతుంది.",
+    tag: "వాట్సాప్‌పై AI వ్యవసాయ నిఘా",
+    title1: "తెలివైన వ్యవసాయం,",
+    title2: "వాట్సాప్‌లో నేరుగా.",
+    subtitle: "కిసాన్AI శాటిలైట్ చిత్రాలు, వాస్తవ వాతావరణ డేటా మరియు నేల ఆరోగ్య రికార్డులను ఉపయోగించి, స్మార్ట్‌ఫోన్‌లో వాట్సాప్ ద్వారా నేరుగా వ్యక్తిగత పంట సలహాలను పంపుతుంది.",
     demoBtn: "ఇంటరాక్టివ్ డెమోను ప్రయత్నించండి",
     howBtn: "ఇది ఎలా పనిచేస్తుంది",
-    stat1Val: "100%",
-    stat1Lbl: "ఆఫ్లైన్ యాక్సెస్",
+    stat1Val: "వాట్సాప్",
+    stat1Lbl: "డెలివరీ ఛానెల్",
     stat2Val: "6-రోజుల",
     stat2Lbl: "శాటిలైట్ రివిజిట్",
     stat3Val: "భారతీయ",
@@ -111,17 +111,17 @@ const translations = {
     stage2Desc: "నాటిన తర్వాత, ఉపగ్రహాలు మీ పంట నీటి ఒత్తిడిని ట్రాక్ చేస్తాయి. తేమ భద్రతా స్థాయిల కంటే తగ్గితే, నష్టం జరగక ముందే నీరు పెట్టడానికి మీకు హెచ్చరిక వస్తుంది.",
     stage2Sources: ["రాడార్ తేమ", "పంట ఒత్తిడి", "బాష్పీభవనం"],
     stage3Num: "03",
-    stage3Title: "3. సమస్య నిర్ధారణ",
-    stage3Desc: "పసుపు ఆకులు లేదా తెగుళ్లను గమనించారా? ఫోటో లేదా వాయిస్ నోట్ పంపండి. మా సిస్టమ్ దానిని విశ్లేషించి, నివారణ సలహాలను పంపుతుంది లేదా నిపుణులను కనెక్ట్ చేస్తుంది.",
-    stage3Sources: ["AI ఫోటో స్కాన్", "వాయిస్ నోట్స్", "ప్రభుత్వ నిపుణుడు"],
-    phoneTag: "సమ్మిళిత ఛానెల్‌లు",
-    phoneTitle: "కీప్యాడ్ ఫోన్‌ల కోసం నిర్మించబడింది",
-    phoneDesc1: "గ్రామీణ భారతదేశంలో 50% కంటే ఎక్కువ మంది చిన్న రైతులు స్మార్ట్‌ఫోన్‌లను ఉపయోగించరు. ఉపయోగించే వారు కూడా నెమ్మదిగా ఉండే ఇంటర్నెట్‌ను ఎదుర్కొంటారు. యాప్‌లు పరిష్కారం కాదు.",
-    phoneDesc2: "కిసాన్AI యాప్‌లను పూర్తిగా దాటవేస్తుంది. మేము సంక్లిష్ట ఉపగ్రహ పటాలను సాధారణ మార్గాలుగా మారుస్తాము:",
-    ivrTitle: "స్వయంచాలక వాయిస్ కాల్స్ (IVR)",
-    ivrDesc: "స్థానిక భారతీయ భాషలలో, స్పష్టమైన నీటి సేద్య చర్యలను వివరిస్తుంది.",
-    smsTitle: "SMS సలహాలు",
-    smsDesc: "ఏదైనా ప్రాథమిక ఫోన్‌కు నేరుగా పంపబడే సంక్షిప్త వచన సారాంశాలు.",
+    stage3Title: "3. ఫోటో నిర్ధారణ",
+    stage3Desc: "పసుపు ఆకులు చూశారా? వాట్సాప్‌లో ఫోటో పంపండి. మా AI దానిని శాటిలైట్ డేటాతో విశ్లేషించి, వ్యాధి నిర్ధారణ మరియు చికిత్స సలహా తిరిగి పంపుతుంది.",
+    stage3Sources: ["వాట్సాప్ ఫోటో", "AI స్కాన్", "నిపుణుల సలహా"],
+    phoneTag: "రైతులకు ఎలా చేరుతుంది",
+    phoneTitle: "వాట్సాప్ ద్వారా డెలివరీ",
+    phoneDesc1: "భారతదేశంలో రైతులు ఇప్పటికే వాట్సాప్‌ను రోజువారీ ఉపయోగిస్తున్నారు. కొత్త యాప్ డౌన్‌లోడ్ చేయకుండా, కిసాన్AI రైతులు ఉన్న చోటే వారికి చేరుతుంది.",
+    phoneDesc2: "మా ఇంటెలిజెన్స్ ఇంజిన్ సంక్లిష్ట శాటిలైట్ మ్యాప్‌లను వాట్సాప్‌లో చదవగలిగే సందేశాలుగా మారుస్తుంది:",
+    ivrTitle: "వాట్సాప్ టెక్స్ట్ సలహాలు",
+    ivrDesc: "స్థానిక భాషలలో వ్యక్తిగత పంట మరియు నీటిపారుదల సందేశాలు నేరుగా వాట్సాప్‌లో పంపబడతాయి.",
+    smsTitle: "వాట్సాప్ ఫోటో నిర్ధారణ",
+    smsDesc: "రైతు ఫోటో పంపుతాడు → మా AI వ్యాధి నిర్ధారణ మరియు చికిత్స ప్రణాళికతో తిరిగి స్పందిస్తుంది.",
     limitsTag: "పరిమితులు",
     limitsTitle: "నిజాయితీ గల సిస్టమ్ పరిమితులు",
     limitsDesc: "మా శాటిలైట్ నమూనాలు ఏమి చేయగలవు మరియు ఏమి చేయలేవు. మేము పరిమితులను నిజాయితీగా అంగీకరిస్తాము.",
@@ -150,14 +150,14 @@ const translations = {
   },
   hi: {
     logo: "किसानएआई",
-    tag: "छोटे और सीमांत किसानों के लिए निर्मित",
-    title1: "अपनी फसलों की रक्षा करें।",
-    title2: "इंटरनेट की आवश्यकता नहीं।",
-    subtitle: "किसानएआई सैटेलाइट रडार, सरकारी मिट्टी के रिकॉर्ड और मौसम के पूर्वानुमान को जोड़कर स्वचालित वॉयस कॉल और एसएमएस के माध्यम से सीधे बुनियादी कीपैड फोन पर व्यक्तिगत कृषि सलाह भेजता है।",
+    tag: "व्हाट्सएप पर AI कृषि बुद्धिमत्ता",
+    title1: "स्मार्ट खेती,",
+    title2: "व्हाट्सएप पर सीधे।",
+    subtitle: "किसानएआई सैटेलाइट डेटा, मौसम और मिट्टी रिकॉर्ड का उपयोग करके किसानों के स्मार्टफोन पर व्हाट्सएप के माध्यम से सीधे व्यक्तिगत फसल सलाह भेजता है।",
     demoBtn: "इंटरैक्टिव डेमो आजमाएं",
     howBtn: "यह कैसे काम करता है",
-    stat1Val: "100%",
-    stat1Lbl: "ऑफ़लाइन सुलभ",
+    stat1Val: "व्हाट्सएप",
+    stat1Lbl: "डिलीवरी चैनल",
     stat2Val: "6-दिवसीय",
     stat2Lbl: "उपग्रह पुनरावलोकन",
     stat3Val: "भारतीय",
@@ -183,17 +183,17 @@ const translations = {
     stage2Desc: "बुवाई के बाद, उपग्रह आपकी फसल के पानी के तनाव को ट्रैक करते हैं। यदि नमी सुरक्षा स्तर से कम होती है, तो नुकसान से पहले आपको सिंचाई की चेतावनी मिलती है।",
     stage2Sources: ["रडार नमी", "फसल तनाव", "वाष्पीकरण"],
     stage3Num: "03",
-    stage3Title: "3. समस्या निदान",
-    stage3Desc: "पीली पत्तियां या कीड़े दिखाई दिए? फोटो या वॉयस नोट भेजें। हमारा सिस्टम इसका विश्लेषण करता है, उपचार की सलाह भेजता है या विशेषज्ञों से जोड़ता है।",
-    stage3Sources: ["AI फोटो स्कैन", "वॉयस नोट्स", "सरकारी विशेषज्ञ"],
-    phoneTag: "समावेशी माध्यम",
-    phoneTitle: "कीपैड फोन के लिए निर्मित",
-    phoneDesc1: "ग्रामीण भारत में 50% से अधिक छोटे किसान स्मार्टफोन का उपयोग नहीं करते हैं। जो करते हैं, वे भी धीमे इंटरनेट का सामना करते हैं। ऐप्स समाधान नहीं हैं।",
-    phoneDesc2: "किसानएआई ऐप्स को पूरी तरह से बायपास करता है। हम जटिल उपग्रह मानचित्रों को सरल तरीकों में बदलते हैं:",
-    ivrTitle: "स्वचालित वॉयस कॉल (IVR)",
-    ivrDesc: "स्थानीय भारतीय भाषाओं में, सिंचाई के स्पष्ट कार्यों का विवरण देती है।",
-    smsTitle: "एसएमएस सलाह",
-    smsDesc: "संक्षिप्त पाठ सारांश जो सीधे किसी भी बुनियादी फोन पर भेजे जाते हैं।",
+    stage3Title: "3. फोटो निदान",
+    stage3Desc: "पीली पत्तियां दिखीं? व्हाट्सएप पर फोटो भेजें। हमारा AI उसे सैटेलाइट डेटा से मिलाकर विश्लेषण करता है और उपचार सलाह के साथ जवाब देता है।",
+    stage3Sources: ["व्हाट्सएप फोटो", "AI स्कैन", "विशेषज्ञ सलाह"],
+    phoneTag: "किसानों तक कैसे पहुंचता है",
+    phoneTitle: "व्हाट्सएप के जरिए डिलीवरी",
+    phoneDesc1: "भारत में किसान पहले से ही व्हाट्सएप का उपयोग करते हैं। कोई नया ऐप डाउनलोड किए बिना, किसानएआई उन्हें वहीं मिलता है जहाँ वे पहले से हैं।",
+    phoneDesc2: "हमारा इंटेलिजेंस इंजन जटिल सैटेलाइट मैप्स को सरल, पठनीय व्हाट्सएप संदेशों में बदलता है:",
+    ivrTitle: "व्हाट्सएप टेक्स्ट सलाह",
+    ivrDesc: "स्थानीय भाषाओं में व्यक्तिगत फसल और सिंचाई सलाह सीधे व्हाट्सएप पर भेजी जाती है।",
+    smsTitle: "व्हाट्सएप फोटो निदान",
+    smsDesc: "किसान फोटो भेजता है → हमारा AI रोग निदान और उपचार योजना के साथ जवाब देता है।",
     limitsTag: "सीमाएं",
     limitsTitle: "ईमानदार प्रणाली सीमाएं",
     limitsDesc: "हमारे उपग्रह मॉडल क्या कर सकते हैं और क्या नहीं कर सकते हैं। हम सीमाओं को ईमानदारी से स्वीकार करते हैं।",
@@ -451,7 +451,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Why Voice/SMS Section with Keypad Phone Image */}
+      {/* WhatsApp Delivery Section */}
       <section className="accessibility-section container">
         <div className="access-grid">
           <div className="access-text">
@@ -461,7 +461,7 @@ const LandingPage = () => {
             <p>{t.phoneDesc2}</p>
             <div className="channel-box">
               <div className="channel-item">
-                <Phone className="channel-icon" size={24} />
+                <MessageCircle className="channel-icon" size={24} />
                 <div>
                   <h4>{t.ivrTitle}</h4>
                   <p>{t.ivrDesc}</p>
@@ -479,7 +479,7 @@ const LandingPage = () => {
           <div className="access-visual-box">
             <img 
               src="/farmer_phone.png" 
-              alt="Hand holding basic keypad mobile phone in agriculture field" 
+              alt="Farmer using WhatsApp on smartphone to receive crop advisory" 
               className="access-image"
             />
           </div>
