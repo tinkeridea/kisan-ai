@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { mockDistricts, mockVillages, mockSeasons, mockWaterSources, mockRecommendations, mockAlertMessages, mockSoilData } from '../data/mockData';
-import { Map as MapIcon, Droplets, Thermometer, CloudRain, Camera, Send, CheckCircle2, ArrowLeft, Layers, ShieldCheck, Cpu, RefreshCw, Terminal, Check, Globe } from 'lucide-react';
+import { geocodeVillage, fetchWeatherData } from '../services/weatherService';
+import { Map as MapIcon, Droplets, CloudRain, Camera, Send, ArrowLeft, Layers, ShieldCheck, RefreshCw, Terminal, Check, Globe, Wind, Sun, Thermometer } from 'lucide-react';
 import './DemoApp.css';
 
 const initialMapCells = [
@@ -33,16 +34,22 @@ const DemoApp = () => {
     phone: '+91 98765 43210'
   });
   
-  const [tier, setTier] = useState(0); // 0 = Satellite, 1 = IoT Sensor
-  const [diagnosisState, setDiagnosisState] = useState('idle'); // idle, uploading, complete
+  const [tier, setTier] = useState(0);
+  const [diagnosisState, setDiagnosisState] = useState('idle');
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
 
   // Map States
   const [mapCells, setMapCells] = useState(initialMapCells);
-  const [selectedCell, setSelectedCell] = useState(initialMapCells[9]); // Dry Zone A
-  const [apiState, setApiState] = useState('idle'); // idle, fetching, success
+  const [selectedCell, setSelectedCell] = useState(initialMapCells[9]);
+  const [apiState, setApiState] = useState('idle');
   const [jsonResponse, setJsonResponse] = useState(null);
-  const [mapTab, setMapTab] = useState('scanner'); // scanner, google
+  const [mapTab, setMapTab] = useState('scanner');
+
+  // Live Weather State
+  const [weather, setWeather] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [weatherError, setWeatherError] = useState(null);
+  const [coords, setCoords] = useState(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -59,9 +66,22 @@ const DemoApp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSimulate = (e) => {
+  const handleSimulate = async (e) => {
     e.preventDefault();
     setStep(2);
+    setWeatherLoading(true);
+    setWeatherError(null);
+    try {
+      const loc = await geocodeVillage(formData.village, formData.district);
+      setCoords(loc);
+      const data = await fetchWeatherData(loc.lat, loc.lon);
+      setWeather(data);
+    } catch (err) {
+      setWeatherError('Could not load live weather data.');
+      console.error(err);
+    } finally {
+      setWeatherLoading(false);
+    }
   };
 
   const soilData = mockSoilData[formData.district] || mockSoilData['Guntur'];
@@ -293,43 +313,105 @@ const DemoApp = () => {
                   </div>
                 </div>
                 
+                {/* Live Weather Loading */}
+                {weatherLoading && (
+                  <div style={{ textAlign: 'center', padding: '12px 0' }}>
+                    <div className="spinner" style={{ margin: '0 auto 8px' }}></div>
+                    <p style={{ fontSize: '0.8rem', color: '#274b3d' }}>Fetching live weather from Open-Meteo…</p>
+                  </div>
+                )}
+
+                {weatherError && (
+                  <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '8px', padding: '10px 14px', fontSize: '0.82rem', color: '#b91c1c' }}>
+                    {weatherError}
+                  </div>
+                )}
+
                 <div className="sensor-readings">
                   <div className="reading-box">
                     <div className="reading-icon moisture">
                       <Droplets size={24} />
                     </div>
                     <div>
-                      <div className="text-sm text-secondary" style={{ fontSize: '0.8rem' }}>Soil Moisture</div>
+                      <div style={{ fontSize: '0.75rem', color: '#274b3d', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        Soil Moisture (0–7cm)
+                        {weather && <span style={{ background: 'rgba(16,185,129,0.15)', color: '#059669', fontSize: '0.6rem', fontWeight: 700, padding: '1px 5px', borderRadius: '3px' }}>LIVE</span>}
+                      </div>
                       <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>
-                        {tier === 0 ? soilData.moistureCurrent + '% (Est)' : (soilData.moistureCurrent - 2) + '.4% (Exact)'}
+                        {weather ? `${weather.soilMoisture0}%` : (soilData.moistureCurrent + '% (Static)')}
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="reading-box">
                     <div className="reading-icon rain">
                       <CloudRain size={24} />
                     </div>
                     <div>
-                      <div className="text-sm text-secondary" style={{ fontSize: '0.8rem' }}>Rain Forecast</div>
-                      <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>None (5 Days)</div>
+                      <div style={{ fontSize: '0.75rem', color: '#274b3d', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        Rain Next 5 Days
+                        {weather && <span style={{ background: 'rgba(16,185,129,0.15)', color: '#059669', fontSize: '0.6rem', fontWeight: 700, padding: '1px 5px', borderRadius: '3px' }}>LIVE</span>}
+                      </div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>
+                        {weather ? `${weather.rain5Days} mm` : 'Loading…'}
+                      </div>
                     </div>
                   </div>
+
+                  {weather && (
+                    <div className="reading-box">
+                      <div className="reading-icon" style={{ background: 'rgba(251,191,36,0.12)', color: '#b45309', border: '1px solid rgba(251,191,36,0.3)', width: 48, height: 48, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Thermometer size={24} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.75rem', color: '#274b3d' }}>Current Temp</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>{weather.current.temp}°C {weather.current.weather.emoji}</div>
+                      </div>
+                    </div>
+                  )}
+
+                  {weather && (
+                    <div className="reading-box">
+                      <div className="reading-icon" style={{ background: 'rgba(99,102,241,0.1)', color: '#4338ca', border: '1px solid rgba(99,102,241,0.2)', width: 48, height: 48, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Wind size={24} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.75rem', color: '#274b3d' }}>Wind Speed</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>{weather.current.windspeed} km/h</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="water-balance-proj">
+                {/* Live 7-Day Forecast Strip */}
+                {weather && (
+                  <div className="forecast-strip">
+                    {weather.forecast.slice(0, 7).map((day, i) => (
+                      <div key={i} className={`forecast-day ${day.rain > 5 ? 'rainy' : ''}`}>
+                        <div className="forecast-label">{day.dayLabel.split(' ')[0]}</div>
+                        <div className="forecast-emoji">{day.weather.emoji}</div>
+                        <div className="forecast-temp">{day.tempMax}°/{day.tempMin}°</div>
+                        <div className="forecast-rain">{day.rain > 0 ? `${day.rain}mm` : '—'}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Dynamic Irrigation Advisory */}
+                <div className={`water-balance-proj advisory-${weather?.irrigationAdvisory?.status || 'warning'}`}>
                   <h4 style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={18} /> Water Balance Projection
+                    <ShieldCheck size={18} />
+                    {weather ? weather.irrigationAdvisory.label : 'Water Balance Projection'}
                   </h4>
-                  <p>
-                    Current Moisture + Expected Rain - Evapotranspiration = <strong>Deficit Warning</strong>
-                  </p>
+                  <p>{weather ? weather.irrigationAdvisory.message : 'Current Moisture + Expected Rain - Evapotranspiration = Deficit Warning'}</p>
                   <div className="progress-bar-bg">
-                    <div className="progress-bar-fill h-full" style={{ width: '30%', height: '100%' }}></div>
+                    <div className="progress-bar-fill" style={{ width: weather ? `${Math.min(100, weather.soilMoisture0 * 2)}%` : '30%', height: '100%' }}></div>
                   </div>
-                  <div className="text-xs text-right mt-2" style={{ color: '#b45309', fontSize: '0.75rem', fontWeight: 600 }}>
-                    Critical moisture threshold reached in 2 days
-                  </div>
+                  {weather && coords && (
+                    <div style={{ fontSize: '0.7rem', color: '#274b3d', marginTop: '6px' }}>
+                      📡 Live data from Open-Meteo API • Coords: {coords.lat.toFixed(4)}°N, {coords.lon.toFixed(4)}°E
+                    </div>
+                  )}
                 </div>
               </div>
 
