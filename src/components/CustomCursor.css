@@ -1,0 +1,96 @@
+.custom-cursor-sprout {
+  width: 24px;
+  height: 24px;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform-origin: 50% 90%;
+  transition: transform 0.08s ease-out, width 0.2s ease, height 0.2s ease;
+}
+
+.custom-cursor-sprout.hovered {
+  transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+.custom-cursor-leaf-trail {
+  width: 36px;
+  height: 36px;
+  border: 1.5px dashed #10b981;
+  border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99998;
+  animation: rotateLeafTrail 8s linear infinite;
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 0.3s ease, 
+              background-color 0.3s ease,
+              border-radius 0.3s ease;
+}
+
+.custom-cursor-leaf-trail.hovered {
+  width: 54px;
+  height: 54px;
+  border-color: var(--accent-color);
+  border-style: solid;
+  border-radius: 50%;
+  background-color: rgba(16, 185, 129, 0.04);
+  animation: rotateLeafTrail 3s linear infinite;
+}
+
+/* Grass Particles Trail */
+.grass-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99997;
+  transform-origin: bottom center;
+  animation: growSwayFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes growSwayFade {
+  0% {
+    transform: translate(-50%, -100%) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(-50%, -100%) scale(1) rotate(5deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -100%) scale(1) rotate(-5deg);
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -90%) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes rotateLeafTrail {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Hide native cursor on fine-pointer devices */
+@media (pointer: fine) {
+  body, a, button, select, input, .stage-card, .track-card, .toggle-btn, .sms-bubble, .reading-box {
+    cursor: none !important;
+  }
+}
+
+/* Hide on mobile/touch interfaces */
+@media (pointer: coarse) {
+  .custom-cursor-sprout,
+  .custom-cursor-leaf-trail,
+  .grass-particle {
+    display: none !important;
+  }
+}
