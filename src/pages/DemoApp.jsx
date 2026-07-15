@@ -30,7 +30,7 @@ const DemoApp = () => {
     village: 'Pedakakani',
     season: 'Kharif (Monsoon)',
     waterSource: 'rainfed',
-    phone: '+91 98480 22338'
+    phone: '+91 98765 43210'
   });
   
   const [tier, setTier] = useState(0); // 0 = Satellite, 1 = IoT Sensor

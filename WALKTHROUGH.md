@@ -20,6 +20,7 @@ A hackathon demo website for a voice-and-SMS agricultural intelligence platform 
 | Typography | Plus Jakarta Sans + Inter (Google Fonts) |
 | Assets | AI-generated crop disease image, satellite scan diagram, farmer keypad phone photo |
 | Build | Single static site (`npm run build` → `dist/`) |
+| Live Link | [https://kisan-ai-nu.vercel.app](https://kisan-ai-nu.vercel.app) |
 
 ---
 
@@ -92,20 +93,27 @@ New folder/
 - Displays the active simulated phone number in the top active profile banner.
 - Automatically appends the target phone number to the Alerts Feed header (e.g. *"Stage 2: Alerts (Sent to +91 98480 22338)"*), illustrating SMS and IVR delivery routing.
 
-### 7. Floating 3D CSS Models (Satellite & Sprout Cube)
-- Built **real 3D objects** directly in the DOM using pure HTML/CSS 3D transforms (`transform-style: preserve-3d`):
-  - **3D Satellite** (`.satellite-3d`): Consists of a central rotating data cube with 6 colored faces and extending teal solar panel wings.
-  - **3D Sprout Cube** (`.cube-3d`): A rotating emerald-tinted block housing a floating green sprout seedling inside.
-- Both 3D models translate in response to mouse coordinates, moving independently of the cursor to create a multi-layered parallax depth effect.
+---
 
-### 8. Growing Grass Trail Animation (Interactive Cursor Spawning)
-- Connected an **animated grass particle generator** directly to the custom cursor.
-- As the user moves their cursor over cards, text, or forms on desktop, the cursor spawns temporary **grass blades and sprouts** along its path.
-- These particles bounce up using custom organic bezier scaling (`growSwayFade` animation), sway gently in the wind, and shrink/fade away after 1.2 seconds.
+## Deployment & GitHub Upload Instructions
+
+### 1. Push to GitHub
+1. Create a blank repository on [GitHub](https://github.com/new). Name it e.g. `kisan-ai`.
+2. Copy the repository URL.
+3. Open your terminal in the project directory and run:
+   ```bash
+   git remote add origin <YOUR_GITHUB_REPO_URL>
+   git branch -M main
+   git push -u origin main
+   ```
+
+### 2. Deploy to Vercel (Done!)
+- The app is successfully deployed to Vercel at **[https://kisan-ai-nu.vercel.app](https://kisan-ai-nu.vercel.app)**.
+- To link your local project to automatically deploy commits when you push to GitHub, follow: [vercel.link/git](https://vercel.link/git).
 
 ---
 
-## How to Run
+## How to Run Locally
 
 ```bash
 # Development server (hot reload)
@@ -126,7 +134,7 @@ npm run build
 - ✅ Interactive multi-language selector (English, Telugu, Hindi) on Landing Page
 - ✅ Interactive 3D Satellite GIS Map + Hover Telemetry inside Demo Dashboard
 - ✅ Live Sentinel API fetch simulator with integrated Terminal Console
-- ✅ Dynamic dynamic location-based Google Satellite Map embed
+- ✅ Dynamic location-based Google Satellite Map embed
 - ✅ Floating 3D CSS Satellite and Data Sprout Cube (mouse-driven parallax)
 - ✅ Premium Organic Light-Green background theme
 - ✅ Interactive 3D background grids & topographic contours on all pages
@@ -134,3 +142,4 @@ npm run build
 - ✅ Simple, intuitive copy with illustrative images
 - ✅ Demo App (onboarding → recommendations → dashboard → alerts → diagnosis)
 - ✅ Clean production build
+- ✅ Live deployment on Vercel
